@@ -18,7 +18,7 @@ func fakeDieRoll(size int) int {
 	return 42
 }
 
-func rollTwo(size1 int, size2 int) (int, int) {
+func rollTwo(size1, size2 int) (int, int) {
 	return dieRoll(size1), dieRoll(size2)
 }
 
@@ -45,7 +45,8 @@ func main() {
 	fmt.Printf("Named params returned: '%s', %v\n", named, err)
 
 	var rolls = getDieRolls()
-	d10 := rolls[0](10)
-	otherd10 := rolls[1](10)
-	fmt.Printf("Die rolls invoked in slice of func ptrs: %d %d", d10, otherd10)
+	for index, rollFunc := range rolls {
+		fmt.Printf("Die Roll Attempt #%d, result: %d\n", index, rollFunc(10))
+	}
+
 }
